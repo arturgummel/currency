@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Artur Gummel">
+    <title>Procedure information system</title>
+
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/components-font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="lib/select2/select2.css">
+    <link rel="stylesheet" href="css/mainpage.css">
+</head>
+<body ng-app="myApp" ng-controller="appController">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Kalkulaator</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+            <h3>Valuutakalkulaator</h3>
+            <form>
+                <label id="currency">Valuuta</label>
+                <select style="width:100px;" id="fromCurrency" ng-model="fromCurrency" ng-options="option.currency for option in Currencies track by option.rate" >
+                </select>
+                <div class="checkbox checkbox-primary">
+                    <input id="fromEuro" type="checkbox" ng-change="checkUncheck(1)" ng-model="fromEuro" value="">
+                    <label for="fromEuro">
+                        Eurost
+                    </label>
+                </div>
+                <div class="checkbox checkbox-primary">
+                    <input id="toEuro" type="checkbox" ng-change="checkUncheck(2)" ng-model="toEuro" value="">
+                    <label for="toEuro">
+                        Euroks
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Kogus</label>
+                    <input step="any" class="form-control" type="number" ng-model="amount" id="amount"/>
+                </div>
+                <div class="form-group">
+                    <button id="formButton" class="btn btn-primary form-control" type="submit" ng-click="convertCurrency()">Arvuta</button>
+                </div>
+            </form>
+            <div id="result"><label>{{result}}</label></div>
+        </div>
+        <div class="col-sm-9 col-md-9 col-lg-9">
+            <h3>Viimati uuendatud: {{time}}</h3>
+            <button ng-show="refreshButton" type="button" class="btn btn-primary" ng-click="getCurrencyData()">Uuenda nüüd</button>
+            <img id="spinner" src="img/loader.gif" ng-show="loading" />
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <table class="table table-hover table-bordered">
+                    <tbody>
+                        <tr ng-repeat="currency in Currencies.slice(0,11)">
+                            <th>{{currency.currency}}</th>
+                            <th>{{currency.rate}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <table class="table table-hover table-bordered">
+                    <tbody>
+                        <tr ng-repeat="currency in Currencies.slice(11,22)">
+                            <th>{{currency.currency}}</th>
+                            <th>{{currency.rate}}</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <table class="table table-hover table-bordered">
+                    <tbody>
+                    <tr ng-repeat="currency in Currencies.slice(22,Currencies.length)">
+                        <th>{{currency.currency}}</th>
+                        <th>{{currency.rate}}</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="lib/jquery/dist/jquery.min.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular-animate/angular-animate.js"></script>
+<script src="lib/angular-route/angular-route.js"></script>
+<script src="lib/angular-resource/angular-resource.js"></script>
+<script src="lib/angular-ui-bootstrap-datetimepicker/datetimepicker.js"></script>
+<script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="lib/angular-notify/angular-notify.js"></script>
+<script src="lib/ng-file-upload/ng-file-upload-all.js"></script>
+<script src="lib/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="lib/angular-ui-select3/src/select3.js"></script>
+<script src="lib/angular-confirm-modal/angular-confirm.js"></script>
+<script src="lib/moment/moment.js"></script>
+<script src="lib/angular-loading-overlay/dist/angular-loading-overlay.js"></script>
+<script src="lib/ngstorage/ngStorage.min.js"></script>
+<script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="lib/select2/select2.js"></script>
+<script src="js/mainpage.js"></script>
+</body>
+</html>
