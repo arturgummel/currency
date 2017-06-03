@@ -13,7 +13,7 @@ final String url = "http://www.eestipank.ee/valuutakursid/export/xml/latest";
     public String getCurrencyData() {
         RestTemplate restTemplate = new RestTemplate();
         Envelop envelop = restTemplate.getForObject(url, Envelop.class);
-        System.err.println(envelop);
+        //System.err.println(envelop);
         return envelop.toString();
     }
 }
